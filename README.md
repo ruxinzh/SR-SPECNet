@@ -20,28 +20,43 @@ Code and data for **“Model-Based Knowledge-Driven Learning Approach for Enhanc
 ## Dataset
 
 **Where:** Zenodo → https://zenodo.org/records/16888438  
-**What to do:** Download the files from Zenodo and place them under your `data` directory.
+**What to do:** Download the files from Zenodo and place them under your `data/BAMA/10/` directory.
 
 **Expected layout (example)**
-
-
-**Download (example with wget)**
+``` sh
+project_root/
+└── data/
+    └── BAMA/
+        └── 10/
+            ├── train/
+            └── test/
+            └── Sample/
+```
+## Environment
 ```bash
-# Replace FILENAME with the exact file name from the Zenodo record page
-wget -O data/BAMA/10/FILENAME "https://zenodo.org/records/16888438/files/FILENAME?download=1"
-
 conda env create -f environment.yml
-conda activate sr_doa
+conda activate SRSPECNet
+```
 
-# Quick view (no saving)
+## Data View
+### Quick view (no saving)
+```bash
 python data_view.py --data_path ./data/BAMA --number_elements 10 --limit 3
+```
 
-# Save images (no GUI)
+### Save images (no GUI)
+```bash
 python data_view.py --data_path ./data/BAMA --number_elements 10 \
   --save_dir outputs/ra_pairs --no-show --limit 10
+```
 
-outputs/ra_pairs/ra_pair_00000.png
+Expected outputs:
+<p align="center">
+  <img src="https://github.com/ruxinzh/SR-SPECNet/blob/main/outputs/ra_viz/ra_sample_00000.png" width="800">
+</p>
 
+## Train
+```bash
 python train.py \
   --data_path ./data/BAMA \
   --number_elements 10 \
@@ -53,7 +68,9 @@ python train.py \
   --augmentation True \
   --loss True \
   --checkpoint_path ./checkpoint
-
+```
+## Test
+```bash
 python test.py \
   --data_path ./data/BAMA \
   --checkpoint_path ./checkpoint/<...>/fold_1_best_model_checkpoint.pth \
@@ -61,16 +78,24 @@ python test.py \
   --output_size 256 \
   --batch_size 1 \
   --save_dir outputs/ra_pairs
-
-outputs/ra_pairs/ra_pair_00000.png
-
+```
+## Evaluate
+```bash
 python eval.py \
   --data_path ./data/BAMA \
   --checkpoint_path ./checkpoint/<...>.pth \
   --number_elements 10 \
   --output_size 256 \
   --batch_size 1
+```
 
+Expected outputs:
+<p align="center">
+  <img src="https://github.com/ruxinzh/SR-SPECNet/blob/main/outputs/ra_pairs/ra_pair_00000.png" width="1000">
+</p>
+
+## Citation
+If you use this work, please cite the following paper:
 ```BibTex
 @article{zheng2025model,
   title   = {Model-Based Knowledge-Driven Learning Approach for Enhanced High-Resolution Automotive Radar Imaging},
