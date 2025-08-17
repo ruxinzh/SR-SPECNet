@@ -1,2 +1,2 @@
-# SR-DOA
-Super-resolution DOA estimation network for super resolution radar imaging generation
+# SR-SPECNet
+Code and data for “Model-Based Knowledge-Driven Learning Approach for Enhanced High-Resolution Automotive Radar Imaging.”
