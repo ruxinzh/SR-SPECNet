@@ -70,23 +70,29 @@ python train.py \
   --checkpoint_path ./checkpoint
 ```
 ## Test
+The pretrained model weights are located in the `./checkpoint/SR_SPEC/` directory.
+
+`best_model_checkpoint.pth`: This model was trained using a standard MSE loss function. 
+
+`best_model_checkpoint_snr.pth`: This model was trained using an SNR-guided loss function.
+
 ```bash
 python test.py \
   --data_path ./data/BAMA \
-  --checkpoint_path ./checkpoint/<...>/fold_1_best_model_checkpoint.pth \
+  --checkpoint_path ./checkpoint/SR_SPEC/best_model_checkpoint_snr.pth \
   --number_elements 10 \
   --output_size 256 \
-  --batch_size 1 \
-  --save_dir outputs/ra_pairs
+  --batch_size 1 
 ```
 ## Evaluate
 ```bash
 python eval.py \
   --data_path ./data/BAMA \
-  --checkpoint_path ./checkpoint/<...>.pth \
+  --checkpoint_path ./checkpoint/SR_SPEC/best_model_checkpoint_snr.pth \
   --number_elements 10 \
   --output_size 256 \
-  --batch_size 1
+  --batch_size 1 \
+  --save_dir outputs/ra_pairs 
 ```
 
 Expected outputs:
